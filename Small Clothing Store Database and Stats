@@ -1,0 +1,25 @@
+- Create a clothing store database.
+CREATE TABLE SmallClothingStore (id INTEGER PRIMARY KEY, Item TEXT, Category TEXT, Price INTEGER, Inventory INTEGER, MostSold TEXT);
+
+INSERT INTO SmallClothingStore VALUES
+(1, "Women's pants", "Bottoms",40, 20, "Best Seller"),
+(2, "Men's pants", "Bottoms", 40, 20, "Sales deficient"),
+(3, "Skirts", "Bottoms", 30, 20, "Sales deficient"),
+(4, "Shorts", "Bottoms", 30, 20, "Best Seller"),
+(5, "Women's shirts", "Tops", 20, 30, "Sales improvement"),
+(6, "Men's shirts", "Tops", 20, 30, "Sales improvement"),
+(7, "Coats", "Tops", 50, 10, "Sales deficient"),
+(8, "Women's belts", "Accessories", 10, 10, "Sales deficient"),
+(9, "Men's belts", "Accessories", 10, 10, "Best seller"),
+(10, "Ties", "Accessories", 15, 10, "Sales deficient"),
+(11, "Earrings", "Accessories", 10, 15, "Best seller"),
+(12, "Boxers", "Underwear", 15, 20, "Sales improvement"),
+(13, "Panties", "Underwear", 15, 20, "Sales deficient"),
+(14, "Socks", "Underwear", 10, 30, "Best Seller"),
+(15, "Bras", "Underwear", 15, 10, "Sales improvement");
+
+- Display the items filtered by price.
+SELECT * FROM SmallClothingStore ORDER BY Price;
+
+- What are the best selling items?
+SELECT item, category, price, mostsold FROM SmallClothingStore WHERE MostSold ="Best Seller" ORDER BY price
