@@ -1,0 +1,92 @@
+/* Create table about the people and what they do here */
+
+CREATE TABLE singers (id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT, genre TEXT, age INTEGER, no_albums INTEGER, active_since INTEGER);
+
+INSERT INTO singers (name, genre, age, no_albums, active_since) VALUES
+("Taylor Swift", "Pop", 33, 12, 2004),
+("Harry Styles", "Pop", 29, 3, 2010),
+("Ariana Grande", "Pop", 29, 6, 2008),
+("Troye Sivan", "Pop", 27, 2, 2006),
+("Madeon", "Dance/Electronic", 28, 2, 2009),
+("Sam Smith", "Pop/Blues", 30, 4, 2007),
+("Paramore", "Pop/Rock", NULL, 6, 2004),
+("Adele", "Pop/Soul", 34, 4, 2006);
+
+
+CREATE TABLE singers_countries (id INTEGER PRIMARY KEY AUTOINCREMENT, artist_id INTEGER, country TEXT);
+
+INSERT INTO singers_countries (artist_id, country) VALUES
+(1, "USA"),
+(2, "UK"),
+(3, "USA"),
+(4, "AUSTRALIA"),
+(5, "FRANCE"),
+(6, "UK"),
+(7, "USA"),
+(8, "UK");
+
+
+CREATE TABLE hit_songs (id INTEGER PRIMARY KEY AUTOINCREMENT, artist_id INTEGER, song TEXT);
+
+INSERT INTO hit_songs (artist_id, song) VALUES
+(1, "You Belong With Me"),
+(2, "As It Was"),
+(3, "Thank U Next"),
+(4, "Heaven"),
+(5, "La Lune"),
+(6, "Unholy ft. Kim Petras"),
+(7, "Decode"),
+(8, "Rolling In The Deep");
+
+
+
+/*Show me artist, where they from and a famous song*/
+
+SELECT a.name, b.country, c.song
+FROM singers AS a
+JOIN singers_countries AS b
+ON a.id = b.artist_id
+JOIN hit_songs AS c
+ON a.id = c.artist_id;
+
+
+/*Show me artist, how many albums they have and their famous song*/
+
+
+SELECT a.name, a.no_albums, c.song
+FROM singers AS a
+JOIN hit_songs c
+ON a.id = c.artist_id;
+
+
+/*Show me artist in order of the year they're active from*/
+
+SELECT name, active_since
+FROM singers
+ORDER BY active_since;
+
+
+/*Show me only pop artists and their famous song*/
+
+SELECT a.name, a.genre, b.song
+FROM singers AS a
+JOIN hit_songs b
+ON a.id = b.artist_id
+WHERE genre = "Pop";
+
+
+/*Show me artists that sing anything than pop, their active year and a famous song*/
+
+SELECT a.name, a.active_since, b.song
+FROM singers AS a
+JOIN hit_songs b
+ON a.id = b.artist_id
+WHERE genre NOT IN ("Pop");
+
+
+/*Show me artist, age, and active years*/
+
+SELECT name, age, active_since
+FROM singers
+ORDER by active_since;
+
