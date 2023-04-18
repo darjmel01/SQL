@@ -1,0 +1,93 @@
+# For this project, I downloaded Spotify data from Kaggle.
+# Then I created a table to insert Spotify data into.
+# Finally, I answered some questions on the data using SQL.
+
+#Creating the table: 
+CREATE TABLE BIT_DB.Spotifydata (
+id integer PRIMARY KEY,
+artist_name varchar NOT NULL,
+track_name varchar NOT NULL,
+track_id varchar NOT NULL,
+popularity integer NOT NULL,
+danceability decimal(4,3) NOT NULL,
+energy decimal(4,3) NOT NULL,
+key integer NOT NULL,
+loudness decimal(5,3) NOT NULL,
+mode integer NOT NULL,
+speechiness decimal(5,4) NOT NULL,
+acousticness decimal(6,5) NOT NULL,
+instrumentalness text NOT NULL,
+liveness decimal(5,4) NOT NULL,
+valence decimal(4,3) NOT NULL,
+tempo decimal(6,3) NOT NULL,
+duration_ms integer NOT NULL,
+time_signature integer NOT NULL 
+)
+
+#Then I inserted the Spotify Data .csv into the table.
+
+
+#Top 10 songs based on popularity.
+
+SELECT
+track_name,
+popularity
+from spotifydata
+ORDER by popularity desc
+LIMIT 10;
+
+
+
+#What artist has the longest song?
+
+SELECT
+artist_name,
+MAX(duration_ms),
+track_name
+from spotifydata;
+
+
+
+#Top 5 of most danceable songs
+
+SELECT
+track_name,
+danceability
+from spotifydata
+ORDER BY danceability desc
+LIMIT 5;
+
+
+
+#What artist name has been repeated on the list more times?
+
+SELECT
+artist_name,
+COUNT(ARTIST_NAME) AS repeated
+from spotifydata
+GROUP BY ARTIST_NAME
+ORDER BY repeated desc
+LIMIT 2;
+
+
+
+
+#To select the top artist from the previous query, select the artist with most popularity within their songs
+
+SELECT
+artist_name,
+AVG(popularity)
+FROM spotifydata
+WHERE artist_name IN ("Olivia Rodrigo","Doja Cat")
+GROUP BY artist_name
+ORDER BY popularity desc
+LIMIT 1;
+
+
+
+#What's the AVG danceability for the top popular songs?
+
+SELECT
+AVG(danceability)
+from spotifydata
+WHERE popularity >= 92
